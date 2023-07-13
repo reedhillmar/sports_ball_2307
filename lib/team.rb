@@ -42,4 +42,40 @@ class Team
   def details
     @details = {"total_value" => total_value, "player_count" => player_count}
   end
+
+  def average_cost_of_player
+    @average_cost_of_player = total_value/player_count
+
+    chars = @average_cost_of_player.to_s.length
+
+    to_currency(@average_cost_of_player.to_s, chars)
+  end
+
+  def to_currency(string, chars)
+    commas_to_add = chars/3 - 1
+
+    commas_added = 0
+
+    if commas_added != commas_to_add
+      @string = string.insert(-4, ",")
+
+      until commas_added == commas_to_add
+        comma_index = @string.index(",")
+
+        @string = @string.insert(comma_index - 3, ",")
+
+        commas_added += 1
+      end
+    end
+
+    @string.prepend("$")
+  end
+
+  def players_by_last_name
+    @last_names = []
+
+    @roster.each {|player| @last_names << player.last_name}
+
+    @last_names.sort.join(", ")
+  end
 end
