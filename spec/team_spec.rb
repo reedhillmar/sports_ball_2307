@@ -14,12 +14,16 @@ describe Team do
       expect(team.location).to eq("Los Angeles")
       expect(team.name).to eq("Dodgers")
     end
+  end
 
+  describe "#player_count" do
     it "starts with no players as default" do
       expect(team.roster).to eq([])
       expect(team.player_count).to eq(0)
     end
+  end
 
+  describe "#add_player" do
     it "can add players to the team and count them" do
       player_1 = Player.new("Michael Palledorous" , 1000000, 36)
       player_2 = Player.new("Kenny DeNunez", 500000, 24)
